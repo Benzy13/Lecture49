@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Lecture49
 {
@@ -37,7 +38,7 @@ namespace Lecture49
 
             //Quesion 3
 
-            Console.WriteLine("Enter a few numbers then type ok to finish:");
+            Console.WriteLine("Enter a number to see it's factorial:");
             string input = Console.ReadLine();
             int.TryParse(input, out number);
             int factorial = 1;
@@ -62,8 +63,51 @@ namespace Lecture49
             //Question 4
 
             var random = new Random();
+            int randomNumber = random.Next(1,10);
+            Console.WriteLine(randomNumber);
+            int numChances = 4;
+            int guess = 0;
+            
+            Console.WriteLine("You have {0} chances to guess the secret number", numChances);
 
+            int k = 1;
+            while (k<=numChances)
+            {
+                Console.WriteLine("Guess number {0}:", k);
+                string userInput = Console.ReadLine();
+                int.TryParse(userInput, out guess);
+                if (guess == randomNumber)
+                {
+                    Console.WriteLine("You have won!");
+                    break;
+                }
+                else if (k == numChances)
+                {
+                    Console.WriteLine("You have lost");
+                    break;
+                }
 
+                else
+                    Console.WriteLine("Try again.");
+                k++;
+            }
+
+            //Question 5
+
+            int inputLength = 5;
+            Console.WriteLine("Enter {0} numbers between 1 and 10 seperated by comma", inputLength);
+            string numberInput = Console.ReadLine();
+            char[] userArray = numberInput.ToCharArray();
+            char[] resultArray = new char[inputLength*2 -1];
+            int j = 0;
+
+            foreach (var value in userArray)
+            {
+                if (value != ',')
+                    resultArray[j] = value;
+                j++;
+            }
+            Console.WriteLine("The maximum of the values {0} values you have entered is: {1}", inputLength, resultArray.Max());
         }
     }
 }
